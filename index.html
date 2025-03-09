@@ -1672,3 +1672,167 @@ processMGT:
     ps -ef | grep httpd  
     ps -ef | grep sshd  
     ps -ef | grep ntpd  
+
+
+  =============================
+Linux7 running notes starts. 08th March, 2025
+===================================
+
+hard drive = 
+cpu :
+ RAM=Random Access memory
+ ROM=[]   
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/xvda4      8.8G  1.6G  7.3G  18%  /
+   7.8G 
+   7.8GB = 7,800MB = 7,800,000KB = 7,800,000,000B    
+total 
+ll -h
+total 96K
+-rw-r--r--. 1 ec2-user ec2-user 118 Nov  2 08:51 app.py
+-rw-rw----. 1 simon    ec2-user  75 Nov  7 19:43 customers.java
+-rw-r--r--. 1 ec2-user ec2-user  67 Nov  7 20:43 fam
+drwxr-xr-x. 2 ec2-user ec2-user   6 Nov  2 09:42 meta
+-rw-r--r--. 1 ec2-user ec2-user 24K Nov  2 09:04 note38
+-rw-r--r--. 1 ec2-user ec2-user 54K Nov 11 10:43 rn.txt
+-rw-r--r--. 1 ec2-user ec2-user 105 Nov  7 20:34 users.txt
+
+Effective space/disk/cpu MGT:    
+ 1. DELETE unwanted files   
+ 2. compress files = 4GB compressed to 1GB   
+
+creating archives Commands:
+zip :   Package and compress (archive) files  
+unzip:  Extract compressed files in a ZIP archive.  
+tar :   It is used to archive the directory/file
+
+https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.97/bin/apache-tomcat-9.0.97.zip
+
+wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.97/bin/apache-tomcat-9.0.97.zip
+
+  tar  -cvf rn.tar.gz rn.txt   
+  tar  -xvf rn.tar.gz rn.txt 
+
+systemMGT:
+  man : Display the on-line manual pages on commands.
+  info: 
+  help:
+  whatis: The whatis command displays a summary line from the  man page
+  service : It will give the status of service.
+     service sshd status 
+       ssh-private-Key = key38.pem    
+       userName = ec2-user
+       public-ip-address = 44.204.78.48 
+       sshClient software= mobaXterm    
+       protocol = ssh protocol for Linux 
+       The ssh daemon/service(sshd) must be running 
+       open ssh port 22    
+         ssh -i key38.pem ec2-user@44.204.78.48  
+
+    sudo service sshd start
+    sudo service sshd restart
+
+  systemctl list-unit-files: It will list all services.
+  uptime: Tells how long the system has been running.
+  last: show listing of last logged in users.
+  top:  
+  Yum: 
+
+Transfer files from one server to another:
+
+Transfer files  to a linux server:
+========================================= 
+scp [secure copy] command 
+   scp filename username@ipaddress:/dir/path/
+   scp -i key38.pem 5.html ec2-user@44.204.78.48:/home/ec2-user/  
+
+
+            ssh -i key38.pem ec2-user@44.204.78.48  
+
+other commands:
+  1. clear   
+  2. history  = record of commands run on the system by the set user 
+  3. cal  
+  4. tee  
+      echo JESUS IS LORD INDEED | tee yes.txt
+      echo JESUS IS LORD INDEED > yes.txt
+      tail -5 /etc/passwd > users.txt  
+      tail -5 /etc/passwd | tee newusers.txt 
+  5. ping - check if the server is up, connected and running 
+  6. uname 
+  7. cat /etc/*release   
+  8. netstat = check the server addresses/ports already in use
+     netstat -tulpn   
+       netstat = network statistics    
+  a server/system/computer has 0-65535(65536) ports/addresses 
+  a server has 65,536 addresses=ports    
+  server ports range = 0-65,535 , 
+  server ports/address = 22/80/443/etc  
+  apache http server/service listens on port 80 & 443   
+  the ssh service=sshd listens on port 22 
+   protocols        ports/address    :    
+   ssh              22  
+   http             80  
+   https            443  
+   nfs              2089  
+   rdp              3389 
+   smtp            25/465/587   
+   tomcat           8080 --- 8000  
+   jenkins          8080  
+   all ports        0, 1, 2, ...,65535 [ 65536 ports ]   
+   check the ports/addresses currently in use:
+netstat -tulpn: 
+  t = tcp 
+  u = udp  
+  l = listening  
+  p = port 
+  n = number  :  
+sudo yum -y install net-tools
+nginx webserver uses port 80 by default   
+apache http  webserver also uses port 80  by default   
+
+1. apache http  webserver  installed  : 
+sudo yum install httpd -y   
+sudo systemctl start httpd   
+sudo systemctl enable httpd   
+
+2. nginx webserver  installed  : 
+sudo yum install nginx -y   
+sudo systemctl start nginx   
+sudo systemctl enable nginx 
+
+IQ: John is unable to connect to the DB Linux server. 
+    Please explain what could be the problem.
+answer:
+1. Check if John is running the ssh commands correctly
+    ssh userName@ipaddress 
+    ssh -i key.pem userName@ipaddress  or   
+    ssh ipaddress@userName
+    ssh -i key.pem ipaddress@userName
+
+2. Check if the ssh-Port22 is open on the server firewall/SG
+   inbound Rule: open port 22 for John to have access   
+
+3. Check if the server is up and running 
+     ping ipaddress/hostname/dns  
+
+4. check if the ssh service(sshd) is running and react accordingly   
+     systemctl status sshd 
+     sudo systemctl status sshd  
+     sudo systemctl start sshd 
+
+How have you resolve issues encountered on Linux platforms ??
+Explain your experience in Linux.
+How to resolve issues encountered while studying??\
+
+
+shutdown:
+  sudo shutdown 
+  sudo init 0  
+
+restart/reboot:
+    sudo init 6 
+    sudo reboot 
+
+IQ: Explain your experience with Linux systems?
+    20min
